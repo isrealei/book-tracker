@@ -1,0 +1,95 @@
+h1 {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 3em;
+    color: darkgreen;
+    font-variation-settings:
+        "wdth" 100;
+    }
+
+    h2 {
+        font-family: "Roboto", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: bold;
+        font-style: normal;
+        color: darkgreen;
+    }
+
+    h1, h2 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    p {
+        font-family: 'Inter', sans-serif; 
+        color: grey;  
+        margin-top: 20px;
+        font-weight: 600;
+        font-size: 1.2rem;
+     }
+
+    hr {
+        border: 5px solid white;
+        border-top: 2px solid #ccc;
+        margin: 20px 0;
+    }
+
+    body {
+        background-color: black;
+    }
+    span {
+        color:  blueviolet;
+        font-weight: bold;
+    }
+
+    img {
+        /* display: block; */
+        margin-left: auto;
+        margin-right: 20px;
+        width: auto;
+        height: 150px;
+        margin-top: 50px;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column; /* stack items vertically */
+        gap: 30px;              /* space between books */
+        padding: 60px;
+    }
+    
+    .intro{
+        text-align: center;
+        margin-top: 50px;
+        justify-content: center;
+        color: white;
+        margin-bottom: 50px;
+    }
+
+    .book-cover {
+        width: 150px;
+        height: auto;
+        border-radius: 4px;
+        flex-shrink: 0;
+        }
+
+    .book-info {
+        flex: 1;
+        color: #ccc;
+        }
+
+    .book-summary {
+        line-height: 1.6;
+        font-size: 1rem;
+        color: #ddd;
+        text-align: justify;
+        margin-bottom: 10px;
+    }
+    .book-title{
+        color: #8ca0ff;
+        text-decoration: underline;
+        margin: 0 0 5px;
+        font-family: "Merriweather", serif;
+        font-size: 1.4rem;
+        }
