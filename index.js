@@ -63,6 +63,7 @@ async function fetchBookData(title) {
   }
 };
 
+
 // Routes
 // this is the endpoint to view all read books / home page
 app.get("/", async (req, res) => {
@@ -84,6 +85,11 @@ app.get("/", async (req, res) => {
     //     books: books
     // });
 });
+
+
+app.get("/new", (req, res) => {
+    res.render("new.ejs");
+})
 
 // this is the endpoint to add new book read
 app.post("/add", async (req, res) => {
@@ -146,17 +152,44 @@ app.post("/add", async (req, res) => {
     }
 })
 
-
-app.patch("/edit/:id", async (req, res) => {
+app.get("/edit/:id", async(req,res) => {
     const bookId = req.params.id;
-    const { date_read, rating, summary } = req.body;
+    try {
+        const query = {
+            text: `SELECT books.id AS book_id, books.book_title, books.author, books.cover_url,
+            review.date_read, review.rating, review.summary
+            FROM books
+            JOIN review ON books.id = review.book_id
+            WHERE books.id=$1`,
+            values: [bookId]
+        };
+        const data = await db.query(query);
+        const book = data.rows[0];
+        console.log(book)
+        res.render("edit.ejs", { book: book });
+    }
+    catch (error) {
+        console.error("Error fetching book for edit:", error);
+    }
+});
+
+// Edit route for post
+app.post("/edit/:id", async (req, res) => {
+    const bookId = req.params.id;
+    let { date_read, rating, summary } = req.body;
     try { 
+        const getReview = {
+            text: "SELECT * FROM review WHERE book_id=$1",
+            values: [bookId]
+        };
+        const reviewData = await db.query(getReview);
+        const data = reviewData.rows[0];
         const query = {
             text: "UPDATE review SET date_read=$1, rating=$2, summary=$3 WHERE book_id=$4",
             values: [
-                date_read ? date_read.toString().trim() : null,
-                rating ? parseInt(rating) : null,
-                summary ? summary.toString().trim() : null,
+                date_read ? date_read.toString().trim() : data.date_read,
+                rating ? parseInt(rating) : data.rating,
+                summary ? summary.toString().trim() : data.summary,
                 bookId
             ]
         };
@@ -173,7 +206,7 @@ app.patch("/edit/:id", async (req, res) => {
 });
 
 
-app.delete("/delete/:id", async (req, res) => {
+app.get("/delete/:id", async (req, res) => {
     const bookId = req.params.id;
     try {
         // Begin a transaction

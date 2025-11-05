@@ -1,85 +1,111 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookTracker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="./styles/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-   
+     <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/8a809cdb3d.js" crossorigin="anonymous"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Domine:wght@400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-<section class="container, intro">
-    <div class="container">
-        <h1>BARILON BOOKS SERIES</h1>
-        <h2>Books I have read</h2>
-        <p>
-         My Book Tracker helps you organize your reading journey. Search for <span>books</span>, view their <span>covers </span>and <span>authors</span>, record your <span>dates</span>, <span>ratings</span>, and <span>reflections</span> — all in one place. It’s a simple way to remember what you’ve read and how each book inspired you.
-        </p>
-        <hr>
-    </div>
-</section>
-<section class="container-fluid">
-  <div class="container content">
-    <% if (locals.books && books.length > 0) { %>
-      <% books.forEach(function(book) { %>
-        <div class="book-item">
-          <img 
-            src=<%= book.cover_url %>
-            alt="Book Cover" 
-            class="book-cover"
-          >
-          <div class="book-info">
-            <h2 class="book-title">
-              "<%= book.book_title %>" by <%= book.author %>
-            </h2>
+    <section class="container, intro">
+        <div class="container">
+            <h1>BARILON BOOKS SERIES</h1>
+            <h2>Books I have read</h2>
             <p>
-              <strong>Date Read:</strong> <%= book.date_read %><br>
-              <strong>Rating:</strong> <%= book.rating %>/10
+                My Book Tracker helps you organize your reading journey. Search for <span>books</span>, view their
+                <span>covers </span>and <span>authors</span>, record your <span>dates</span>, <span>ratings</span>, and
+                <span>reflections</span> — all in one place. It’s a simple way to remember what you’ve read and how each
+                book inspired you.
             </p>
-            <p class="book-summary">
-              <%= book.summary %>
-            </p>
-          </div>
+            <hr>
         </div>
-      <% }) %>
+    </section>
+    <section class="container-fluid">
+        <div class="container content">
+            <form action="/add" method="GET">
+                <a href="/new" class="btn btn-success mb-4">
+                    <i class="fa-solid fa-plus"></i> Add New Book
+                </a>
+            </form>
+            <% if (locals.books && books.length> 0) { %>
+                <% books.forEach(function(book) { %>
+                    <div class="book-item">
+                        <img src=<%=book.cover_url %>
+                        alt="Book Cover"
+                        class="book-cover"
+                        >
+                        <div class="book-info">
+                            <h2 class="book-title">
+                                "<%= book.book_title %>" by <%= book.author %>
+                            </h2>
+                            <p>
+                                <strong>Date Read:</strong>
+                                <%= book.date_read %><br>
+                                    <strong>Rating:</strong>
+                                    <%= book.rating %>/10
+                            </p>
+                            <p class="book-summary">
+                                <%= book.summary %>
+                            </p>
+                        </div>
+                        <div class="d-flex flex-shrink-0">
+                            <form action="/edit/<%= book.id %>" method="GET" class="me-2">
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </button>
+                            </form>
+                            <form action="/delete/<%= book.id %>" method="GET">
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fa-solid fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <% }) %>
 
-    <% } else { %>
-      <div class="book-item">
-        <img 
-          src="https://covers.openlibrary.org/b/id/6632621-M.jpg" 
-          alt="Book Cover" 
-          class="book-cover"
-        >
-        <div class="book-info">
-          <h2 class="book-title">
-            "The Alchemist" by Paulo Coelho
-          </h2>
-          <p>
-            <strong>Date Read:</strong> March 15, 2023<br>
-            <strong>Rating:</strong> 5/5
-          </p>
-          <p class="book-summary">
-            "The Alchemist" is a novel by Paulo Coelho that tells the story of Santiago, 
-            a young shepherd from Spain who dreams of finding a hidden treasure located 
-            near the Egyptian pyramids. Encouraged by a mysterious king, Santiago embarks 
-            on a journey across the desert, encountering various characters who teach him 
-            valuable life lessons. The novel explores themes of destiny, personal legend, 
-            and the importance of following one's dreams. Through his adventures, Santiago 
-            learns to listen to his heart and discovers that the true treasure lies not in 
-            material wealth but in self-discovery and spiritual fulfillment.
-          </p>
+                        <% } else { %>
+                            <div class="book-item">
+                                <img src="https://covers.openlibrary.org/b/id/6632621-M.jpg" alt="Book Cover"
+                                    class="book-cover">
+                                <div class="book-info">
+                                    <h2 class="book-title">
+                                        "The Alchemist" by Paulo Coelho
+                                    </h2>
+                                    <p>
+                                        <strong>Date Read:</strong> March 15, 2023<br>
+                                        <strong>Rating:</strong> 5/5
+                                    </p>
+                                    <p class="book-summary">
+                                        "The Alchemist" is a novel by Paulo Coelho that tells the story of Santiago,
+                                        a young shepherd from Spain who dreams of finding a hidden treasure located
+                                        near the Egyptian pyramids. Encouraged by a mysterious king, Santiago embarks
+                                        on a journey across the desert, encountering various characters who teach him
+                                        valuable life lessons. The novel explores themes of destiny, personal legend,
+                                        and the importance of following one's dreams. Through his adventures, Santiago
+                                        learns to listen to his heart and discovers that the true treasure lies not in
+                                        material wealth but in self-discovery and spiritual fulfillment.
+                                    </p>
+                                </div>
+                            </div>
+                            <% } %>
+
         </div>
-      </div>
-    <% } %>
+    </section>
 
-  </div>
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

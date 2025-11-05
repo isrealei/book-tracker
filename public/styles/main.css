@@ -93,3 +93,10 @@ h1 {
         font-family: "Merriweather", serif;
         font-size: 1.4rem;
         }
+
+        .addlabel{
+            color: green;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: bolder;
+        }
