@@ -42,6 +42,7 @@ export async function addNewBook(req, res) {
 };
 
 export async function renderEditPage(req, res) {
+    console.log(req.user);
     const bookId = req.params.id;
     const book = await getBookById(bookId);
     res.render("edit.ejs", { book: book });

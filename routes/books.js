@@ -7,14 +7,15 @@ import {
     deleteBook, 
     editBookReview
 } from "../controllers/bookControllers.js";
+import ensureAuthenticated from  "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/", getAllBooks);
-router.post("/add", addNewBook);
-router.get("/new", renderNewBookPage);
-router.get("/edit/:id", renderEditPage);
-router.post("/edit/:id", editBookReview);
-router.get("/delete/:id", deleteBook)
+router.post("/add", ensureAuthenticated, addNewBook);
+router.get("/new", ensureAuthenticated, renderNewBookPage);
+router.get("/edit/:id",ensureAuthenticated, renderEditPage);
+router.post("/edit/:id", ensureAuthenticated, editBookReview);
+router.get("/delete/:id", ensureAuthenticated, deleteBook)
 
 export default router;

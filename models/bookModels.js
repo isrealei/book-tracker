@@ -132,4 +132,4 @@ export async function deleteBookAndReview(bookId) {
             msg: `Error deleting book and review: ${error}`
         });
     };
-}
+};
