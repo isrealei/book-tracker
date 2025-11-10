@@ -1,5 +1,6 @@
 import {createUser} from "../models/userModel.js";
 import { dbConnect } from "../config/db.js";
+import passport from "passport";
 const db = dbConnect();
 
 export async function signUpPage(req, res) {

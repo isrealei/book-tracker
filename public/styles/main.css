@@ -100,3 +100,14 @@ h1 {
             margin-bottom: 10px;
             font-weight: bolder;
         }
+
+        .login {
+           justify-content: center;
+           text-align: center;
+           align-items: center;
+           padding: 70px;
+           display: block;
+           
+        }
+        
+

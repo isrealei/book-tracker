@@ -5,11 +5,12 @@ import {
     renderNewBookPage, 
     renderEditPage, 
     deleteBook, 
-    editBookReview
+    editBookReview,
 } from "../controllers/bookControllers.js";
 import ensureAuthenticated from  "../middleware/authMiddleware.js";
 
 const router = express.Router();
+
 
 router.get("/", getAllBooks);
 router.post("/add", ensureAuthenticated, addNewBook);

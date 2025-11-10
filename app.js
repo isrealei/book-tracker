@@ -6,8 +6,7 @@ import bookRoutes from "./routes/books.js";
 import authRoutes from "./routes/auth.js";
 import session from "express-session";
 import passport from "passport";
-import { configurePassport } from "./config/passport.js";
-
+import { configurePassport, configureGooglePassportStrategy} from "./config/passport.js";
 
 dotenv.config();
 
@@ -34,6 +33,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 configurePassport(passport);
+configureGooglePassportStrategy(passport);
 
 // Routes
 app.use("/", bookRoutes);

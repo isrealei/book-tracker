@@ -3,7 +3,7 @@ import {
     signUpPage,
     registerNewUser,
     renderLoginPage,
-    logOutUser
+    logOutUser,
 } from "../controllers/authControllers.js";
 import passport from "passport";
 
@@ -17,6 +17,15 @@ router.post("/login", passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/auth/login"
 }));
+
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+router.get("/google/callback/", 
+    passport.authenticate("google", {
+        successRedirect: "/",
+        failureRedirect: "/auth/login"
+    })
+);
 
 router.get("/logout", logOutUser);
 

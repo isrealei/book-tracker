@@ -18,6 +18,29 @@
 </head>
 
 <body>
+    <section>
+        <nav class="navbar navbar-expand-lg bg-primary-subtle">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Barilon</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active fs-5 fw-bold " aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active fs-5 fw-bold" href="/auth/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active fs-5 fw-bold" href="/auth/signup" aria-disabled="true">Sign-up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+    </section>
     <section class="container, intro">
         <div class="container">
             <h1>BARILON BOOKS SERIES</h1>
@@ -33,11 +56,33 @@
     </section>
     <section class="container-fluid">
         <div class="container content">
-            <form action="/add" method="GET">
-                <a href="/new" class="btn btn-success mb-4">
-                    <i class="fa-solid fa-plus"></i> Add New Book
-                </a>
-            </form>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <!-- Left side: Add New Book -->
+                <div>
+                    <form action="/new" method="GET" class="d-inline">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa-solid fa-plus"></i> Add New Book
+                    </button>
+                    </form>
+                </div>
+
+                <!-- Right side: Login + Logout -->
+                <div>
+                    <form action="/auth/login" method="GET" class="d-inline me-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </button>
+                    </form>
+
+                    <form action="/auth/logout" method="GET" class="d-inline">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                    </form>
+                </div>
+                </div>
+
+                                
             <% if (locals.books && books.length> 0) { %>
                 <% books.forEach(function(book) { %>
                     <div class="book-item">
