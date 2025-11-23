@@ -11,7 +11,7 @@ export function dbConnect() {
 
   db.connect()
     .then(() => console.log("Database connected successfully"))
-    .catch(err => console.error("DB connection error:", err));
+    .catch((err) => console.error("DB connection error:", err));
 
   return db;
 }
